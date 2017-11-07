@@ -1,19 +1,9 @@
-import numpy as np
 from sklearn import tree
+from sklearn.metrics import accuracy_score
 
-def dectree(iris):
-
-    np.random.seed(0)
-    iris_X = iris.data
-    iris_Y = iris.target
-    indices = np.random.permutation(len(iris_X))
-
-    iris_x_train = iris_X[indices[:-10]]
-    iris_y_train = iris_Y[indices[:-10]]
-    iris_x_test = iris_X[indices[-10:]]
-    iris_y_test = iris_Y[indices[-10:]]
-    np.unique(iris_Y)
+def dectree(iris_x_train, iris_x_test, iris_y_train, iris_y_test):
 
     dec = tree.DecisionTreeClassifier()
     dec.fit(iris_x_train, iris_y_train)
-    return dec.predict(iris_x_test)
+    predicted =  dec.predict(iris_x_test)
+    return accuracy_score(iris_y_test, predicted)
