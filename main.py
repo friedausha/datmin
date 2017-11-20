@@ -17,13 +17,12 @@ iris_x_test = iris_X[indices[-rnd:]]
 iris_y_test = iris_Y[indices[-rnd:]]
 np.unique(iris_Y)
 
-print ('Accuracy score of knn :')
-print str(KNN(iris_x_train, iris_x_test, iris_y_train, iris_y_test))
-
-print ('Accuracy score of decision tree :')
-print str(dectree(iris_x_train, iris_x_test, iris_y_train, iris_y_test))
-
-print ('Accuracy score of linear regression :')
-print str(line_reg(iris_x_train, iris_x_test, iris_y_train, iris_y_test))
-
-
+print ('KNN')
+print ('Accuracy score of knn :') + str(KNN(iris_x_train, iris_x_test, iris_y_train, iris_y_test))
+print ('')
+print ('Decision Tree')
+print ('Accuracy score of decision tree :') + str(dectree(iris_x_train, iris_x_test, iris_y_train, iris_y_test))
+print ('')
+print ('Linear Regression')
+print ('Accuracy score of linear regression :') + str(line_reg(iris_x_train, iris_x_test, iris_y_train, iris_y_test))
+print ('')
