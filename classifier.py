@@ -12,20 +12,23 @@ def measure(y_actual, y_predicted):
     FN = 0
     print y_actual
     print y_predicted
-    for i in range(len(y_predicted)):
-        if y_actual[i]==y_predicted[i]==1:
-           TP += 1
-    for i in range(len(y_predicted)):
-        if y_predicted[i]==1 and y_actual[i]==y_predicted[i]:
-           FP += 1
-    for i in range(len(y_predicted)):
-        if y_actual[i]==y_predicted[i]==0:
-           TN += 1
-    for i in range(len(y_predicted)):
-        if y_predicted[i]==0 and y_actual[i]==y_predicted[i]:
-           FN += 1
-    TP = truediv(TP, len(y_predicted))
-    FN = truediv(FN, len(y_predicted))
+    #print str(len(y_actual))
+    print str(len(y_predicted))
+    for j in range(3):
+        for i in range(len(y_predicted)):
+            if y_actual[i]==y_predicted[i]==j:
+               TP += 1
+        for i in range(len(y_predicted)):
+            if y_predicted[i]==j and y_actual[i]==y_predicted[i]:
+               FP += 1
+        for i in range(len(y_predicted)):
+            if y_actual[i]==y_predicted[i]!=j:
+               TN += 1
+        for i in range(len(y_predicted)):
+            if y_predicted[i]!=j and y_actual[i]==y_predicted[i]:
+               FN += 1
+    TP = truediv(TP, len(y_predicted))/3*100
+    FN = truediv(FN, len(y_predicted))/3*100
     print 'The sensitivity percentage is : ' + str(TP)
     print 'The specificity percentage is : ' + str(FN)
 
@@ -42,6 +45,7 @@ def line_reg(iris_x_train, iris_x_test, iris_y_train, iris_y_test):
 
     regr = linear_model.LinearRegression()
     regr.fit(iris_x_train, iris_y_train)
+    predicted = regr.predict(iris_x_test)
     return regr.score(iris_x_test, iris_y_test)
 
 def KNN(iris_x_train, iris_x_test, iris_y_train, iris_y_test):
@@ -49,5 +53,4 @@ def KNN(iris_x_train, iris_x_test, iris_y_train, iris_y_test):
     knn = neighbors.KNeighborsClassifier()
     knn.fit(iris_x_train, iris_y_train)
     predicted = knn.predict(iris_x_test)
-    measure(iris_y_test, predicted)
     return knn.score(iris_x_test, iris_y_test)
