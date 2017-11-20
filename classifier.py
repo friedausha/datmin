@@ -10,8 +10,8 @@ def measure(y_actual, y_predicted):
     FP = 0
     TN = 0
     FN = 0
-    print y_actual
-    print y_predicted
+    # print y_actual
+    # print y_predicted
     #print str(len(y_actual))
     print str(len(y_predicted))
     for j in range(3):
@@ -39,18 +39,19 @@ def dectree(iris_x_train, iris_x_test, iris_y_train, iris_y_test):
     predicted =  dec.predict(iris_x_test)
     measure(iris_y_test, predicted)
     #print str(sum(recall_score(iris_y_test, predicted, average=None))/3)
-    return accuracy_score(iris_y_test, predicted)
+    return accuracy_score(iris_y_test, predicted)*100
 
 def line_reg(iris_x_train, iris_x_test, iris_y_train, iris_y_test):
 
     regr = linear_model.LinearRegression()
     regr.fit(iris_x_train, iris_y_train)
     predicted = regr.predict(iris_x_test)
-    return regr.score(iris_x_test, iris_y_test)
+    return regr.score(iris_x_test, iris_y_test)*100
 
 def KNN(iris_x_train, iris_x_test, iris_y_train, iris_y_test):
 
     knn = neighbors.KNeighborsClassifier()
     knn.fit(iris_x_train, iris_y_train)
     predicted = knn.predict(iris_x_test)
-    return knn.score(iris_x_test, iris_y_test)
+    measure(iris_y_test, predicted)
+    return knn.score(iris_x_test, iris_y_test)*100
